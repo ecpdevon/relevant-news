@@ -1,0 +1,112 @@
+# Relevant News — Quellen mit Prioritäts-Stufen
+# Prioritäten nach Tom's System:
+#   1. Offizielle/primäre Quellen — 40%
+#   2. Etablierte Nachrichtenquellen — 25%
+#   3. Fach-/Nischenquellen — 20%
+#   4. Suchtreffer/indirekte Quellen — 10%
+#   5. Social/sonstige Signale — 5%
+
+sources:
+  # ═══════════════════════════════════════════
+  # TIER 2 — Etablierte Nachrichtenquellen (25%)
+  # ═══════════════════════════════════════════
+
+  - name: NZZ Technologie
+    type: rss
+    url: https://www.nzz.ch/technologie.rss
+    language: de
+    tier: 2
+
+  - name: NZZ International
+    type: rss
+    url: https://www.nzz.ch/international.rss
+    language: de
+    tier: 2
+
+  - name: NZZ Wirtschaft
+    type: rss
+    url: https://www.nzz.ch/wirtschaft.rss
+    language: de
+    tier: 2
+
+  - name: Tages-Anzeiger Front
+    type: rss
+    url: https://partner-feeds.publishing.tamedia.ch/rss/tagesanzeiger/front
+    language: de
+    tier: 2
+
+  - name: Tages-Anzeiger Digital
+    type: rss
+    url: https://partner-feeds.publishing.tamedia.ch/rss/tagesanzeiger/digital
+    language: de
+    tier: 2
+
+  - name: Tages-Anzeiger Wirtschaft
+    type: rss
+    url: https://partner-feeds.publishing.tamedia.ch/rss/tagesanzeiger/wirtschaft
+    language: de
+    tier: 2
+
+  - name: FAZ Aktuell
+    type: rss
+    url: https://www.faz.net/rss/aktuell/
+    language: de
+    tier: 2
+
+  - name: New York Times Technology
+    type: rss
+    url: https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml
+    language: en
+    tier: 2
+
+  - name: New York Times World
+    type: rss
+    url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
+    language: en
+    tier: 2
+
+  - name: SCMP News
+    type: rss
+    url: https://www.scmp.com/rss/91/feed
+    language: en
+    tier: 2
+
+  # ═══════════════════════════════════════════
+  # TIER 3 — Fach-/Nischenquellen (20%)
+  # ═══════════════════════════════════════════
+
+  - name: VentureBeat
+    type: rss
+    url: https://venturebeat.com/feed/
+    language: en
+    tier: 3
+
+  - name: Hacker News
+    type: rss
+    url: https://hnrss.org/frontpage
+    language: en
+    tier: 3
+
+  # ═══════════════════════════════════════════
+  # TIER 5 — Social Signale (5%)
+  # ═══════════════════════════════════════════
+
+  - name: Reddit Programming
+    type: rss
+    url: https://www.reddit.com/r/programming/top.rss?t=day&limit=10
+    language: en
+    tier: 5
+
+settings:
+  max_articles_per_source: 10
+  max_total_fetch: 60
+  request_timeout: 15
+  user_agent: "RelevantNews/1.0"
+
+  # Tier-Gewichtung für Gesamtscore
+  tier_weights:
+    1: 1.4    # Primärquellen (Behörden, Firmenblogs, Projekte)
+    2: 1.25   # Etablierte Nachrichten
+    3: 1.0    # Fach-/Nischenquellen
+    4: 0.5    # Suchtreffer/indirekt
+    5: 0.25   # Social
