@@ -1,0 +1,181 @@
+# Relevant News — Gewichtete Relevanz-Kriterien (Tom)
+#
+# Gesamtscore = Summe aller Dimensionen × Quellen-Tier-Gewicht
+# Nur Artikel über Schwellwert kommen durch.
+#
+# Kurzregel: Lieber 3 sehr passende als 15 halbpassende.
+
+filters:
+
+  # ═══════════════════════════════════════════
+  # DIMENSION 1: Themenfit (25%)
+  #   Energie, Reisen, Gleitschirm, Velo,
+  #   Gesundheit, Tech/OpenClaw
+  # ═══════════════════════════════════════════
+  topic_keywords:
+    # Energie
+    - Energie
+    - Strom
+    - Solar
+    - Photovoltaik
+    - Windkraft
+    - Kernenergie
+    - AKW
+    - Energiepolitik
+    - Energiewende
+    - Strompreis
+    - Batterie
+    - Speicher
+    
+    # Reisen
+    - Reisen
+    - Tourismus
+    - Flug
+    - Airline
+    - Swiss
+    - Flughafen
+    - Zug
+    - SBB
+    - ÖV
+    - Hotel
+    
+    # Gleitschirm / Paragliding
+    - Gleitschirm
+    - Paragliding
+    - Gleitschirmfliegen
+    - Tandemflug
+    - Thermik
+    - DHV
+    
+    # Velo / Fahrrad
+    - Velo
+    - Fahrrad
+    - E-Bike
+    - Veloweg
+    - Radweg
+    - Mountainbike
+    - Velostadt
+    
+    # Gesundheit
+    - Gesundheit
+    - Medizin
+    - Ernährung
+    - Fitness
+    - Schlaf
+    - Krankenkasse
+    - Prämie
+    - Gesundheitswesen
+    
+    # Tech / OpenClaw
+    - OpenClaw
+    - Open Source
+    - Open-Source
+    - KI
+    - Künstliche Intelligenz
+    - AI
+    - LLM
+    - Agent
+    - Automation
+    - Python
+    - Programmierung
+    - API
+    - Software
+    - Cloud
+
+  # ═══════════════════════════════════════════
+  # DIMENSION 2: Region Schweiz/Europa (5%)
+  # ═══════════════════════════════════════════
+  region_keywords:
+    - Schweiz
+    - Zürich
+    - Bern
+    - Swiss
+    - Europa
+    - EU
+    - Brüssel
+    - Schengen
+    - Alpen
+    - Bundesrat
+    - CH-
+    - Eidgenössisch
+
+  # ═══════════════════════════════════════════
+  # DIMENSION 3: Praktische Relevanz (10%)
+  # ═══════════════════════════════════════════
+  practical_keywords:
+    - Gesetz
+    - Verordnung
+    - Regulierung
+    - Änderung
+    - neu
+    - ab sofort
+    - Pflicht
+    - Verbot
+    - Erlaubnis
+    - Kosten
+    - Preis
+    - Gebühr
+    - Tarif
+    - Versicherung
+
+  # ═══════════════════════════════════════════
+  # AUSSCHLUSS — Hart gefiltert (0 Punkte)
+  # ═══════════════════════════════════════════
+  exclude_keywords:
+    - Sport
+    - Fussball
+    - Tennis
+    - Formel 1
+    - Olympia
+    - Promi
+    - Klatsch
+    - Royal
+    - Königshaus
+    - Boulevard
+    - Horoskop
+    - Wetter
+    - Lotto
+    - Unfall
+    - Verbrechen
+    - Mord
+
+  # ═══════════════════════════════════════════
+  # ANTI-CLICKBAIT-PATTERNS
+  # Titel die diese Muster enthalten → verworfen
+  # ═══════════════════════════════════════════
+  clickbait_patterns:
+    - "Sie werden nicht glauben"
+    - "Unglaublich"
+    - "Schockierend"
+    - "???"
+    - "!!!"
+    - "VIRAL"
+    - "MUST SEE"
+    - "You won't believe"
+    - "This one trick"
+    - "Shocking"
+
+  # ═══════════════════════════════════════════
+  # SCORING-GEWICHTUNG
+  # ═══════════════════════════════════════════
+  weights:
+    topic_match: 25        # Themenfit: Energie, Reisen, Gleitschirm, Velo, Gesundheit, Tech
+    recency: 20            # Aktualität / Neuigkeitswert (je neuer, desto höher)
+    practical: 10          # Praktische Relevanz (Gesetze, Änderungen, Kosten)
+    region: 5              # Region Schweiz/Europa
+    signal_quality: 5      # Vertrauenswürdigkeit der Quelle
+    
+    # Hinweis: "Direkter Bezug zu Thomas" (35%) ist implizit über topic_keywords abgedeckt
+
+  # ═══════════════════════════════════════════
+  # SCHWELLWERTE & LIMITS
+  # ═══════════════════════════════════════════
+  settings:
+    min_total_score: 10      # Minimum für Aufnahme
+    max_output: 10           # Max finale Artikel (Qualität > Quantität)
+    dedup_title_similarity: 0.8  # Dubletten-Erkennung via Titel-Ähnlichkeit
+    max_article_age_hours: 72   # Artikel älter als 72h → verworfen
+    case_sensitive: false
+    match_title: true
+    match_summary: true
+    match_body: false
