@@ -1,0 +1,10 @@
+# Relevant News — Abhängigkeiten
+# Installation: uv pip install -r requirements.txt
+#                oder: pip install -r requirements.txt
+
+feedparser>=6.0
+requests>=2.31
+beautifulsoup4>=4.12
+pyyaml>=6.0
+python-telegram-bot>=21.0
+openai>=1.0
